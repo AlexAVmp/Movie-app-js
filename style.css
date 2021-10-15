@@ -1,0 +1,53 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: whitesmoke;
+    font-family: Roboto;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2%;
+    background-color: green;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.search {
+    padding: 8px;
+}
+
+.movie {
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    margin: 1%;
+    background-color: rgb(83, 214, 83);
+}
+
+.logo {
+    width: 100%;
+}
+
+.review {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-height: 100%;
+    background-color: white;
+    transform: translateY(101%);
+}
+
+.movie:hover .review {
+    transform: translateY(0);
+}
