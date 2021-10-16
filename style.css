@@ -8,7 +8,7 @@ body {
     margin: 0;
 }
 
-header {
+.header {
     display: flex;
     justify-content: flex-end;
     padding: 2%;
@@ -21,7 +21,7 @@ main {
     flex-wrap: wrap;
 }
 
-.search {
+.header__search {
     padding: 8px;
 }
 
@@ -50,4 +50,22 @@ main {
 
 .movie:hover .review {
     transform: translateY(0);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin: 30px 10px;
+}
+
+.page {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.page.disabled {
+    color: grey;
+    cursor: not-allowed;
 }
