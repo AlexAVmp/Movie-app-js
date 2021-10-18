@@ -57,6 +57,8 @@ function getMovies(url) {
                 next.classList.remove('disabled');
             }
 
+
+
         } else {
             main.innerHTML = `<h1>No results found</h1>`
         }
@@ -67,7 +69,7 @@ function showMovies(data) {
     main.innerHTML = '';
 
     data.forEach((movie) => {
-    const {title, poster_path, vote_average, overview} = movie;
+    const {title, poster_path, vote_average, overview, id} = movie;
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
     movieEl.innerHTML = `
@@ -79,11 +81,40 @@ function showMovies(data) {
         <div class='review'>
             <h3>Review</h3>
             ${overview}
+            </br>
+            <button class="more" id='${id}'>More</button>
         </div>
     `
     main.appendChild(movieEl);
+
+    document.getElementById(id).addEventListener('click', () => {
+        openNav(movie);
+    }) 
     })
 }
+
+const overContent = document.getElementById('overlay-content');
+
+function openNav(movie) {
+    let id = movie.id;
+    fetch(BASE_URL + '/movie/'+id+'/videos?'+API_KEY)
+    .then(response => response.json())
+    .then(videoData => {
+        if (videoData){
+            document.getElementById('navigation').style.width = '100%';
+            let embed = [];
+
+            embed.push(`<iframe width="1000" height="563" src="https://www.youtube.com/embed/${videoData.results[0].key}" title="${videoData.results[0].name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+            overContent.innerHTML = embed.join('');
+        }
+    })
+}
+
+function closeNav() {
+  document.getElementById("navigation").style.width = "0%";
+} 
+
+const overlayContent = document.getElementById('overlay-content');
 
 function getColor(vote){
     if (vote > 9) {
